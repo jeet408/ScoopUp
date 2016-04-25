@@ -2,10 +2,12 @@ public class Member extends MemberAbstraction {
 	
 	MemberStatus memberStatus;
 	float points;
+	int rides; //update as soon as new rides are done
 	
 	public Member(){
 		memberStatus = new Passenger(this);
 		points = 0;
+		rides = 0;
 	}
 	
 	public void setPassenger() {
@@ -61,8 +63,15 @@ public class Member extends MemberAbstraction {
 	
 	public void addPoints(float amt){
 		points += amt;
+		
 	}
 
+	public void rideComplete(){
+		rides++;
+		if (rides % 10 == 0){
+			points += 2;
+		}
+	}
 	
 	
 }
