@@ -6,29 +6,48 @@ public class ScoopUp {
 	private static int option;
 	private String answer;
 	private String trash;
-	private String email;
-	private String password;
+	private int time;
+	private int day;
+	private static String email;
+	private static String password;
 	
-	Scanner in = new Scanner(System.in);
+	static Scanner in = new Scanner(System.in);
 	
-	Member m = new Member();
+	static Member m = new Member();
 	
 	
 	public static void main(String[] args) {
-	
+		
+//		Member member;
+//		member = new Member();
+//		member.setPassenger();
+//		member.setDriver();
+		
+		
 		ScoopUp system = new ScoopUp();
 		
 		system.loginScreen();
 		
 		if (option == 1) {
-			
+			//TO DO: Implement login
 //			System.out.println("Enter your email address: ");
 //			email = in.nextLine();
-//			if (email.equals(m.getEmail()))
+//			System.out.println("Enter you password: ");
+//			password = in.nextLine();
+//			
+//			if (email.equals(m.getEmail()) && password.equals(m.getPassword())){
+//				system.mainScreen();
+//			}
+//			else {
+//				System.out.println("Invalid user credentials!");
+//			}
 			
-			system.mainScreen();
+			
+			system.mainScreen(); // remove after fixing login
+			
+			
 			if (system.getOption() == 1){
-				
+				system.viewProfileScreen();
 			} else if (system.getOption() == 2){
 				
 			} else if (system.getOption() == 3){
@@ -47,11 +66,6 @@ public class ScoopUp {
 			
 			System.out.println("Invalid input!");
 		}
-		
-		Member member;
-		member = new Member();
-		member.setPassenger();
-		member.setDriver();
 	
 	}
 	
@@ -99,6 +113,10 @@ public class ScoopUp {
 		return option;
 	}
 	
+	/**
+	 * View Profile
+	 * @return
+	 */
 	private int viewProfileScreen(){
 		System.out.println("***PROFILE***\n\n");
 		
@@ -138,6 +156,43 @@ public class ScoopUp {
 		return option;
 	}
 	
+	private void requestRide(){
+		
+		System.out.println("Press 1 if you need a ride to school.");
+		System.out.println("Press 2 if you need a ride from school.");
+		System.out.println("Press 3 to go back");
+		option = in.nextInt();
+		
+		if (option == 1){
+			System.out.println("On what day to you need a ride?\nPress 1 for Monday\nPress 2 for Tuesday\nPress 3 for Wednesday\nPress 4 for Thursday\nPress 5 for Friday\nPress 6 for Saturday\nPress 7 for Sunday\n");
+			day = in.nextInt();
+			System.out.println("What time do you need to arrive to school? (Use military time, ex: 1230, 1315, 1400, etc.)");
+			time = in.nextInt();
+			m.memberSchedule.addArrivals(day, time);
+			System.out.println("A notification will be sent to you once driver accepts your request");
+			requestRide();
+			
+		} else if (option == 2){
+			System.out.println("On what day to you need a ride?\nPress 1 for Monday\nPress 2 for Tuesday\nPress 3 for Wednesday\nPress 4 for Thursday\nPress 5 for Friday\nPress 6 for Saturday\nPress 7 for Sunday\n");
+			day = in.nextInt();
+			System.out.println("What time do you need to leave from school? (Use military time, ex: 1230, 1315, 1400, etc.)");
+			time = in.nextInt();
+			m.memberSchedule.addDepartures(day, time);
+			System.out.println("A notification will be sent to you once driver accepts your request");
+			requestRide();
+		
+		} else if (option == 3) {
+			mainScreen();
+			
+		} else {
+			System.out.println("Invalid Input!");
+			requestRide();
+		}
+	}
+	
+	/**
+	 * Sing Up
+	 */
 	private void signUpScreen(){
 		trash = in.nextLine();
 		System.out.println("***Sing Up***");
@@ -174,15 +229,15 @@ public class ScoopUp {
 		if (answer.equals("y")){
 			m.setHasVehicle(true);
 			System.out.println("Enter vehicle's year: ");
-			m.vehicle.setYear(in.nextInt());
+			//m.vehicle.setYear(in.nextInt());
 			System.out.println("Enter vehicle's make: ");
-			m.vehicle.setMake(in.nextLine());
+			//m.vehicle.setMake(in.nextLine());
 			System.out.println("Enter vehicle's model: ");
-			m.vehicle.setModel(in.nextLine());
+			//m.vehicle.setModel(in.nextLine());
 			System.out.println("Enter vehicle's color: ");
-			m.vehicle.setColor(in.nextLine());
+			//m.vehicle.setColor(in.nextLine());
 			System.out.println("Enter vehicle's year: ");
-			m.vehicle.setAvailableSeats(in.nextInt());
+			//m.vehicle.setAvailableSeats(in.nextInt());
 		} else if (answer.equals("n")) {
 			m.setHasVehicle(false);
 		} else { 
@@ -286,10 +341,12 @@ public class ScoopUp {
 				System.out.println("Invalid Input!");
 			}
 		}
+		System.out.println("\n");
+		System.out.println("\n");
 		System.out.println("Congratulation! You are registered with ScoopUp.");
 		System.out.println("\n");
 		System.out.println("\n");
-		System.out.println("\n");
+		
 		loginScreen();
 	}
 }

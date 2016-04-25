@@ -1,4 +1,3 @@
-import java.time.DayOfWeek;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,8 +10,9 @@ public class Member extends MemberAbstraction {
 	private boolean hasVehicle;
 	private boolean preference;
 	private ArrayList<String> vehicles = new ArrayList<String>();
-	private HashMap<DayOfWeek, Integer> arrivals;
-	private HashMap<DayOfWeek, Integer> departures;
+	private HashMap<Integer, Integer> arrivals;
+	private HashMap<Integer, Integer> departures;
+	
 	
 	MemberStatus memberStatus;
 	float points;
@@ -184,48 +184,54 @@ public class Member extends MemberAbstraction {
 
 
 
+	@Override
+	public void addArrivals(int day, int time) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void addDepartures(int day, int time) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 	/**
 	 * @return the arrivals
 	 */
-	public HashMap<DayOfWeek, Integer> getArrivals() {
+	public HashMap<Integer, Integer> getArrivals() {
 		return arrivals;
 	}
+
+
 
 	/**
 	 * @param arrivals the arrivals to set
 	 */
-	public void setArrivals(HashMap<DayOfWeek, Integer> arrivals) {
+	public void setArrivals(HashMap<Integer, Integer> arrivals) {
 		this.arrivals = arrivals;
 	}
+
+
 
 	/**
 	 * @return the departures
 	 */
-	public HashMap<DayOfWeek, Integer> getDepartures() {
+	public HashMap<Integer, Integer> getDepartures() {
 		return departures;
 	}
+
+
 
 	/**
 	 * @param departures the departures to set
 	 */
-	public void setDepartures(HashMap<DayOfWeek, Integer> departures) {
+	public void setDepartures(HashMap<Integer, Integer> departures) {
 		this.departures = departures;
-	}
-
-
-
-	@Override
-	public void addArrivals(HashMap<DayOfWeek, Integer> arrivals) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public void addDepartures(HashMap<DayOfWeek, Integer> departures) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
