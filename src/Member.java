@@ -23,20 +23,8 @@ public class Member extends MemberAbstraction {
 		memberStatus = ms;
 	}
 	
-	public MemberStatus getMemberStatus(MemberStatus ms) {
-		return ms;
-	}
-
-	@Override
-	public void setMember() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public MemberStatus getMemberStatus() {
-		// TODO Auto-generated method stub
-		return null;
+		return memberStatus;
 	}
 
 	/**
@@ -72,6 +60,6 @@ public class Member extends MemberAbstraction {
 			points += 2;
 		}
 	}
-	
+
 	
 }
