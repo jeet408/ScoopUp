@@ -10,7 +10,9 @@ public abstract class MemberAbstraction {
 	public abstract void setMemberStatus(MemberStatus ms);
 	
 	/**
-	 * Abstract methods for Payemnts (Bridge Pattern)
+	 * Abstract methods for Payments (Bridge Pattern)
 	 */
-	abstract public void payDriver(Member driver, Member passenger, float amt, boolean payType);
+	abstract public boolean payDriver(float amt, boolean payType);
+	abstract public void addPoints(float amt);
+
 }
