@@ -1,10 +1,13 @@
-/**
- * @author jakubkalinowski
- *
- */
+import java.time.DayOfWeek;
+import java.util.HashMap;
+
 public abstract class MemberAbstraction {
+	
+	/**
+	 * Abstract methods for MemberStatus (State Pattern)
+	 */
 	public abstract void setPassenger();
-	public abstract void setMember();
+	public abstract void setDriver();
 	
 	public abstract MemberStatus getMemberStatus();
 	public abstract void setMemberStatus(MemberStatus ms);
@@ -15,4 +18,9 @@ public abstract class MemberAbstraction {
 	abstract public boolean payDriver(float amt, boolean payType);
 	abstract public void addPoints(float amt);
 
+	/**
+	 * Abstract methods for MemberSchedule
+	 */
+	public abstract void addArrivals(HashMap<DayOfWeek, Integer> arrivals);
+	public abstract void addDepartures(HashMap<DayOfWeek, Integer> departures);
 }
