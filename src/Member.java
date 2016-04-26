@@ -18,9 +18,9 @@ public class Member extends MemberAbstraction {
 	float points;
 	int rides; //update as soon as new rides are done
 	
-	//MemberSchedule memberSchedule;
+	MemberSchedule memberSchedule;
 	
-	//Vehicle vehicle;
+	Vehicle vehicle;
 	
 	
 	public Member(){

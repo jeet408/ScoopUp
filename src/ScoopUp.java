@@ -10,6 +10,7 @@ public class ScoopUp {
 	private int day;
 	private static String email;
 	private static String password;
+	private int seats;
 	
 	static Scanner in = new Scanner(System.in);
 	
@@ -25,67 +26,29 @@ public class ScoopUp {
 		
 		ScoopUp system = new ScoopUp();
 		
-		system.loginScreen();
+		system.systemStart(); 	// Login/SignUp
+		system.systemMain();	// Main menu
 		
-		if (option == 1) {
-			//TO DO: Implement login
-			System.out.println(m.getEmail() +" "+ m.getPassword());
-			System.out.println("Enter your email address: ");
-			email = in.nextLine();
-			System.out.println("Enter you password: ");
-			password = in.nextLine();
-//			
-			
-//			if (email.equals(m.getEmail()) && password.equals(m.getPassword())){
-//				system.mainScreen();
-//			}
-//			else {
-//				System.out.println("Invalid user credentials!");
-//			}
-			
-			
-			system.mainScreen(); // remove after fixing login
-			
-			
-			if (system.getOption() == 1){
-				system.viewProfileScreen();
-			} else if (system.getOption() == 2){
-				
-			} else if (system.getOption() == 3){
-				
-			} else if (system.getOption() == 4){
-				
-			} else {
-				System.out.println("Invalid Input");
-			}
-				
-		} else if (option == 2) {
-			
-			system.signUpScreen();
-			
+	}
+	
+	/**
+	 * START THE PROGRAM
+	 */
+	public void systemStart(){
+		loginScreen();
+			if (option == 1){
+			login();
+		} else if (option == 2){
+			signUpScreen();
+			systemStart();
 		} else {
-			
-			System.out.println("Invalid input!");
+			System.out.println("Invalid Input!");
+			systemStart();
 		}
-	
 	}
-	
+
 	/**
-	 * @return the option
-	 */
-	public int getOption() {
-		return option;
-	}
-	
-	/**
-	 * @param option the option to set
-	 */
-	public void setOption(int option) {
-		this.option = option;
-	}
-	
-	/**
-	 * Login Screen
+	 * LOGIN SCREEN
 	 * @return
 	 */
 	private int loginScreen(){
@@ -94,105 +57,45 @@ public class ScoopUp {
 		System.out.println("***LOGIN***");
 		System.out.println("Press 1 to Login");
 		System.out.println("Press 2 to SignUp");
-		
-		return in.nextInt();
-	}
-	
-	/**
-	 * Main Menu
-	 * @return
-	 */
-	private int mainScreen(){
-		
-		//System.out.println("Logged in as " + member.getName);
-		System.out.println("***MAIN MENU***");
-		System.out.println("Press 1 to View Profile");
-		System.out.println("Press 2 to Request a Ride");
-		System.out.println("Press 3 for Payments");
-		System.out.println("Press 4 to Logout");
 		option = in.nextInt();
 		return option;
 	}
 	
 	/**
-	 * View Profile
+	 * LOGIN SYSTEM
 	 * @return
 	 */
-	private int viewProfileScreen(){
-		System.out.println("***PROFILE***\n\n");
-		
-		System.out.println("*"+m.getName()+"'s contact information*");
-		System.out.println("Status: " + m.getMemberStatus());
-		System.out.println("Preference (On Duty): " + m.isPreference());
-		System.out.println("Emial: " + m.getEmail());
-		System.out.println("Address: " + m.getAddress());
-		
-		System.out.println("*"+m.getName()+"'s vehicle information*");
-		System.out.println("Vehicle: " + m.isHasVehicle());
-		System.out.println("Vehicle: " + m.getVehicles());
-		//System.out.println("Seats Available: " + m.vehicle.getAvailableSeats());
-		
-		System.out.println("*"+m.getName()+"'s schedule*");
-		System.out.println("TO SCHOOL:");
-		System.out.println("Mondays: "+ m.getArrivals().get(DayOfWeek.MONDAY));
-		System.out.println("Mondays: "+ m.getArrivals().get(DayOfWeek.TUESDAY));
-		System.out.println("Mondays: "+ m.getArrivals().get(DayOfWeek.WEDNESDAY));
-		System.out.println("Mondays: "+ m.getArrivals().get(DayOfWeek.THURSDAY));
-		System.out.println("Mondays: "+ m.getArrivals().get(DayOfWeek.FRIDAY));
-		
-		System.out.println("FROM SCHOOL:");
-		System.out.println("Mondays: "+ m.getDepartures().get(DayOfWeek.MONDAY));
-		System.out.println("Mondays: "+ m.getDepartures().get(DayOfWeek.TUESDAY));
-		System.out.println("Mondays: "+ m.getDepartures().get(DayOfWeek.WEDNESDAY));
-		System.out.println("Mondays: "+ m.getDepartures().get(DayOfWeek.THURSDAY));
-		System.out.println("Mondays: "+ m.getDepartures().get(DayOfWeek.FRIDAY));
-		
-		System.out.println("OPTIONS");
-		System.out.println("Press 1 to edit status");
-		System.out.println("Press 2 to edit preference");
-		System.out.println("Press 3 to edit seats available");
-		System.out.println("Press 4 to edit schedule");
-		System.out.println("Press 5 to go back to MAIN MENU");
-		option = in.nextInt();
-		return option;
-	}
-	
-	private void requestRide(){
-		
-		System.out.println("Press 1 if you need a ride to school.");
-		System.out.println("Press 2 if you need a ride from school.");
-		System.out.println("Press 3 to go back");
-		option = in.nextInt();
-		
-		if (option == 1){
-			System.out.println("On what day to you need a ride?\nPress 1 for Monday\nPress 2 for Tuesday\nPress 3 for Wednesday\nPress 4 for Thursday\nPress 5 for Friday\nPress 6 for Saturday\nPress 7 for Sunday\n");
-			day = in.nextInt();
-			System.out.println("What time do you need to arrive to school? (Use military time, ex: 1230, 1315, 1400, etc.)");
-			time = in.nextInt();
-			//m.memberSchedule.addArrivals(day, time);
-			System.out.println("A notification will be sent to you once driver accepts your request");
-			requestRide();
+	public int login(){
+		if (option == 1) {
+			//TO DO: Implement login
+			in.nextLine();
+			//System.out.println(m.getEmail() +" "+ m.getPassword());//TEST
+			System.out.println("Enter your email address: ");
+			email = in.nextLine();
+			m.setEmail(email);
+			System.out.println("Enter you password: ");
+			password = in.nextLine();
+			m.setPassword(password);
 			
-		} else if (option == 2){
-			System.out.println("On what day to you need a ride?\nPress 1 for Monday\nPress 2 for Tuesday\nPress 3 for Wednesday\nPress 4 for Thursday\nPress 5 for Friday\nPress 6 for Saturday\nPress 7 for Sunday\n");
-			day = in.nextInt();
-			System.out.println("What time do you need to leave from school? (Use military time, ex: 1230, 1315, 1400, etc.)");
-			time = in.nextInt();
-			//m.memberSchedule.addDepartures(day, time);
-			System.out.println("A notification will be sent to you once driver accepts your request");
-			requestRide();
-		
-		} else if (option == 3) {
-			mainScreen();
+//			if (email.equals(m.getEmail()) && password.equals(m.getPassword())){
+//				system.mainScreen();
+//			}
+//			else {
+//				System.out.println("Invalid user credentials!");
+//			}
 			
+			return option;
+		} else if (option == 2) {
+			signUpScreen();
+			return 1;		
 		} else {
-			System.out.println("Invalid Input!");
-			requestRide();
+			System.out.println("Invalid input!");
+			return 1;
 		}
 	}
 	
 	/**
-	 * Sign Up
+	 * SINGUP SCREEN
 	 */
 	private void signUpScreen(){
 		in.nextLine(); //FLUSH
@@ -230,15 +133,15 @@ public class ScoopUp {
 		if (answer.equals("y")){
 			m.setHasVehicle(true);
 			System.out.println("Enter vehicle's year: ");
-			//m.vehicle.setYear(in.nextInt());
+			m.vehicle.setYear(in.nextInt());
 			System.out.println("Enter vehicle's make: ");
-			//m.vehicle.setMake(in.nextLine());
+			m.vehicle.setMake(in.nextLine());
 			System.out.println("Enter vehicle's model: ");
-			//m.vehicle.setModel(in.nextLine());
+			m.vehicle.setModel(in.nextLine());
 			System.out.println("Enter vehicle's color: ");
-			//m.vehicle.setColor(in.nextLine());
+			m.vehicle.setColor(in.nextLine());
 			System.out.println("Enter vehicle's year: ");
-			//m.vehicle.setAvailableSeats(in.nextInt());
+			m.vehicle.setAvailableSeats(in.nextInt());
 		} else if (answer.equals("n")) {
 			m.setHasVehicle(false);
 		} else { 
@@ -246,7 +149,7 @@ public class ScoopUp {
 		}
 		
 		System.out.println("You are almost done. \nLastly we need to setup your schedule for the rest of the semester.");
-		System.out.println("Will you be needing a ride to school on Mondays? (y/n)");
+		System.out.println("Will you be needing a ride on Mondays? (y/n)");
 		answer = in.nextLine();
 		
 		/*
@@ -254,16 +157,16 @@ public class ScoopUp {
 		 */
 		if (answer.equals("y")){
 			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			//m.memberSchedule.addArrivals(DayOfWeek.MONDAY, in.nextInt());
+			m.memberSchedule.addArrivals(0, time);
 			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			//m.memberSchedule.addArrivals(DayOfWeek.MONDAY, in.nextInt());
+			m.memberSchedule.addDepartures(0, time);
 		} else if (answer.equals("n")) {
 			System.out.println("");
 		} else { 
 			System.out.println("Invalid ipnut!");
 		}
 		
-		System.out.println("Will you be needing a ride to school on Tuesdays? (y/n)");
+		System.out.println("Will you be needing a ride on Tuesdays? (y/n)");
 		answer = in.nextLine();
 		
 		/*
@@ -271,16 +174,16 @@ public class ScoopUp {
 		 */
 		if (answer.equals("y")){
 			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			//m.memberSchedule.addArrivals(DayOfWeek.TUESDAY, in.nextInt());
+			m.memberSchedule.addArrivals(1, time);
 			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			//m.memberSchedule.addArrivals(DayOfWeek.TUESDAY, in.nextInt());
+			m.memberSchedule.addDepartures(1, time);
 		} else if (answer.equals("n")) {
 			System.out.println("");
 		} else { 
 			System.out.println("Invalid ipnut!");
 		}
 		
-		System.out.println("Will you be needing a ride to school on Wednesdays? (y/n)");
+		System.out.println("Will you be needing a ride on Wednesdays? (y/n)");
 		answer = in.nextLine();
 		
 		/*
@@ -288,16 +191,16 @@ public class ScoopUp {
 		 */
 		if (answer.equals("y")){
 			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			//m.memberSchedule.addArrivals(DayOfWeek.WEDNESDAY, in.nextInt());
+			m.memberSchedule.addArrivals(2, time);
 			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			//m.memberSchedule.addArrivals(DayOfWeek.WEDNESDAY, in.nextInt());
+			m.memberSchedule.addDepartures(2, time);
 		} else if (answer.equals("n")) {
 			System.out.println("");
 		} else { 
 			System.out.println("Invalid ipnut!");
 		}
 		
-		System.out.println("Will you be needing a ride to school on Thursdays? (y/n)");
+		System.out.println("Will you be needing a ride on Thursdays? (y/n)");
 		answer = in.nextLine();
 		
 		/*
@@ -305,16 +208,16 @@ public class ScoopUp {
 		 */
 		if (answer.equals("y")){
 			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			//m.memberSchedule.addArrivals(DayOfWeek.THURSDAY, in.nextInt());
+			m.memberSchedule.addArrivals(3, time);
 			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			//m.memberSchedule.addArrivals(DayOfWeek.THURSDAY, in.nextInt());
+			m.memberSchedule.addDepartures(3, time);
 		} else if (answer.equals("n")) {
 			System.out.println("");
 		} else { 
 			System.out.println("Invalid ipnut!");
 		}
 		
-		System.out.println("Will you be needing a ride to school on Fridays? (y/n)");
+		System.out.println("Will you be needing a ride on Fridays? (y/n)");
 		answer = in.nextLine();
 		
 		/*
@@ -322,9 +225,9 @@ public class ScoopUp {
 		 */
 		if (answer.equals("y")){
 			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			//m.memberSchedule.addArrivals(DayOfWeek.FRIDAY, in.nextInt());
+			m.memberSchedule.addArrivals(4, time);
 			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			//m.memberSchedule.addArrivals(DayOfWeek.FRIDAY, in.nextInt());
+			m.memberSchedule.addDepartures(4, time);
 		} else if (answer.equals("n")) {
 			System.out.println("");
 		} else { 
@@ -348,7 +251,244 @@ public class ScoopUp {
 		System.out.println("Congratulation! You are registered with ScoopUp.");
 		System.out.println("\n");
 		System.out.println("\n");
-		
-		loginScreen();
 	}
+	
+	/**
+	 * MAIN MENU SCREEN
+	 * @return
+	 */
+	private int mainScreen(){
+		
+		//System.out.println("Logged in as " + member.getName);
+		System.out.println("***MAIN MENU***");
+		System.out.println("Press 1 to View Profile");
+		System.out.println("Press 2 to Request a Ride");
+		System.out.println("Press 3 for Payments");
+		System.out.println("Press 4 to Logout");
+		option = in.nextInt();
+		return option;
+	}
+	
+	/**
+	 * MAIN SYSTEM
+	 */
+	public void systemMain() {
+		mainScreen();
+		if (option == 1){
+			viewProfileScreen();
+		} else if (option == 2){
+			requestRide();
+		} else if (option == 3){
+		//payments();
+		} else if (option == 4){
+			systemStart();
+		} else {
+			System.out.println("Invalid Input");
+			systemMain();
+		}
+	
+	}
+	
+	/**
+	 * VIEW PROFILE SCREEN
+	 * @return
+	 */
+	private int viewProfileScreen(){
+		System.out.println("***PROFILE***\n\n");
+		
+		System.out.println("*"+m.getName()+"'s contact information*");
+		System.out.println("Status: " + m.getMemberStatus());
+		System.out.println("Preference (On Duty): " + m.isPreference());
+		System.out.println("Emial: " + m.getEmail());
+		System.out.println("Address: " + m.getAddress());
+		
+		System.out.println("*"+m.getName()+"'s vehicle information*");
+		System.out.println("Vehicle: " + m.isHasVehicle());
+		System.out.println("Vehicle: " + m.getVehicles());
+		System.out.println("Seats Available: " + m.vehicle.getAvailableSeats());
+		
+		System.out.println("*"+m.getName()+"'s schedule*");
+		System.out.println("TO SCHOOL:");
+		
+		//TO DO: iterate over arrivals hashmap
+		
+		System.out.println("FROM SCHOOL:");
+		// TO DO: Iterate over departures hashmap
+		
+		System.out.println("OPTIONS");
+		System.out.println("Press 1 to change status");
+		System.out.println("Press 2 to change preference");
+		System.out.println("Press 3 to edit seats available");
+		System.out.println("Press 4 to edit schedule");
+		System.out.println("Press 5 to go back to MAIN MENU");
+		option = in.nextInt();
+		return option;
+	}
+	
+	/**
+	 * PROFILE SYSTEM
+	 */
+	public void systemProfile(){
+		if (option == 1) {
+			//TO DO: FIX IT
+			if (m.getMemberStatus().equals("Your status is set to a Passenger")){
+			//	m.setMemberStatus(m.memberStatus.setDriver());
+				System.out.println("Your status is set to a Driver");
+			} else {
+		//		m.setMemberStatus(m.memberStatus.setPassenger());
+				System.out.println("Your status is set to a Passenger");
+			}
+		} else if (option == 2) {
+			if (m.isPreference() == true){
+				m.setPreference(false);
+			} else {
+				m.setPreference(true);
+			}
+		} else if (option == 3) {
+			seats = in.nextInt();
+			m.vehicle.setAvailableSeats(seats);;
+		} else if (option == 4) {
+			System.out.println("Enter your new schedule:");
+			System.out.println("TO SCHOOL:");
+			System.out.println("Will you be needing a ride on Mondays? (y/n)");
+			answer = in.nextLine();
+			
+			/*
+			 * MONDAY -- Pass info to memberLongTermSchedule
+			 */
+			if (answer.equals("y")){
+				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
+				m.memberSchedule.addArrivals(0, time);
+				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
+				m.memberSchedule.addDepartures(0, time);
+			} else if (answer.equals("n")) {
+				System.out.println("");
+			} else { 
+				System.out.println("Invalid ipnut!");
+			}
+			
+			System.out.println("Will you be needing a ride on Tuesdays? (y/n)");
+			answer = in.nextLine();
+			
+			/*
+			 * TUESDAY -- info to memberLongTermSchedule
+			 */
+			if (answer.equals("y")){
+				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
+				m.memberSchedule.addArrivals(1, time);
+				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
+				m.memberSchedule.addDepartures(1, time);
+			} else if (answer.equals("n")) {
+				System.out.println("");
+			} else { 
+				System.out.println("Invalid ipnut!");
+			}
+			
+			System.out.println("Will you be needing a ride on Wednesdays? (y/n)");
+			answer = in.nextLine();
+			
+			/*
+			 * WEDNESDAY -- Pass info to memberLongTermSchedule
+			 */
+			if (answer.equals("y")){
+				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
+				m.memberSchedule.addArrivals(2, time);
+				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
+				m.memberSchedule.addDepartures(2, time);
+			} else if (answer.equals("n")) {
+				System.out.println("");
+			} else { 
+				System.out.println("Invalid ipnut!");
+			}
+			
+			System.out.println("Will you be needing a ride on Thursdays? (y/n)");
+			answer = in.nextLine();
+			
+			/*
+			 * Pass info to memberLongTermSchedule
+			 */
+			if (answer.equals("y")){
+				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
+				m.memberSchedule.addArrivals(3, time);
+				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
+				m.memberSchedule.addDepartures(3, time);
+			} else if (answer.equals("n")) {
+				System.out.println("");
+			} else { 
+				System.out.println("Invalid ipnut!");
+			}
+			
+			System.out.println("Will you be needing a ride on Fridays? (y/n)");
+			answer = in.nextLine();
+			
+			/*
+			 * FRIDAY -- Pass info to memberLongTermSchedule
+			 */
+			if (answer.equals("y")){
+				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
+				m.memberSchedule.addArrivals(4, time);
+				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
+				m.memberSchedule.addDepartures(4, time);
+			} else if (answer.equals("n")) {
+				System.out.println("");
+			} else { 
+				System.out.println("Invalid ipnut!");
+			}
+			
+		} else {
+			systemMain();
+		}
+	}
+	
+	/**
+	 * RIDE REQUEST SCREEN
+	 */
+	private void requestRide(){
+		
+		System.out.println("Press 1 if you need a ride to school.");
+		System.out.println("Press 2 if you need a ride from school.");
+		System.out.println("Press 3 to go back");
+		option = in.nextInt();
+		
+		if (option == 1){
+			System.out.println("On what day to you need a ride?\nPress 1 for Monday\nPress 2 for Tuesday\nPress 3 for Wednesday\nPress 4 for Thursday\nPress 5 for Friday\nPress 6 for Saturday\nPress 7 for Sunday\n");
+			day = in.nextInt();
+			System.out.println("What time do you need to arrive to school? (Use military time, ex: 1230, 1315, 1400, etc.)");
+			time = in.nextInt();
+			m.memberSchedule.addArrivals(day, time);
+			System.out.println("A notification will be sent to you once driver accepts your request");
+			requestRide();
+			
+		} else if (option == 2){
+			System.out.println("On what day to you need a ride?\nPress 1 for Monday\nPress 2 for Tuesday\nPress 3 for Wednesday\nPress 4 for Thursday\nPress 5 for Friday\nPress 6 for Saturday\nPress 7 for Sunday\n");
+			day = in.nextInt();
+			System.out.println("What time do you need to leave from school? (Use military time, ex: 1230, 1315, 1400, etc.)");
+			time = in.nextInt();
+			m.memberSchedule.addDepartures(day, time);
+			System.out.println("A notification will be sent to you once driver accepts your request");
+			requestRide();
+		
+		} else if (option == 3) {
+			mainScreen();
+			
+		} else {
+			System.out.println("Invalid Input!");
+			requestRide();
+		}
+	}
+
+	/**
+	 * @return the option
+	 */
+	public int getOption() {
+		return option;
+	}
+	
+	/**
+	 * @param option the option to set
+	 */
+	public void setOption(int option) {
+		this.option = option;
+	}
+	
 }
