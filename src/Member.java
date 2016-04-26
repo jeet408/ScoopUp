@@ -9,7 +9,7 @@ public class Member extends MemberAbstraction {
 	private String address;
 	private boolean hasVehicle;
 	private boolean preference;
-	private ArrayList<String> vehicles = new ArrayList<String>();
+	private ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
 	private HashMap<Integer, Integer> arrivals;
 	private HashMap<Integer, Integer> departures;
 	
@@ -19,8 +19,6 @@ public class Member extends MemberAbstraction {
 	int rides; //update as soon as new rides are done
 	
 	MemberSchedule memberSchedule;
-	
-	Vehicle vehicle;
 	
 	
 	public Member(){
@@ -65,6 +63,17 @@ public class Member extends MemberAbstraction {
 		this.address = address;
 	}
 	
+	/***************************************
+	 **         SET VEHICLES              **
+	 **************************************/
+	/**
+	 * Add vehicle to array of vehicles
+	 * @param newVehicle vehicle to be added
+	 */
+	public void setVehicles(Vehicle newVehicle){
+		vehicles.add(newVehicle);
+	}
+	
 /*****************************
  *****************************
  **   PUT ACCESSORS HERE
@@ -96,7 +105,6 @@ public class Member extends MemberAbstraction {
 		return password;
 	}
 
-
 	/**
 	 * @return the address
 	 */
@@ -104,7 +112,14 @@ public class Member extends MemberAbstraction {
 		return address;
 	}
 
+	/************************************
+	 **         GET VEHICLES           **
+	 ***********************************/
+
 	
+	/************
+	 * WHat??
+	 */
 	public void setPassenger() {
 		
 		System.out.println(memberStatus.setPassenger());
