@@ -23,18 +23,19 @@ public class ScoopUp {
 //		member.setPassenger();
 //		member.setDriver();
 		
-		
 		ScoopUp system = new ScoopUp();
 		
 		system.loginScreen();
 		
 		if (option == 1) {
 			//TO DO: Implement login
-//			System.out.println("Enter your email address: ");
-//			email = in.nextLine();
-//			System.out.println("Enter you password: ");
-//			password = in.nextLine();
+			System.out.println(m.getEmail() +" "+ m.getPassword());
+			System.out.println("Enter your email address: ");
+			email = in.nextLine();
+			System.out.println("Enter you password: ");
+			password = in.nextLine();
 //			
+			
 //			if (email.equals(m.getEmail()) && password.equals(m.getPassword())){
 //				system.mainScreen();
 //			}
@@ -329,6 +330,7 @@ public class ScoopUp {
 		} else { 
 			System.out.println("Invalid ipnut!");
 		}
+		
 		if (m.getMemberStatus().equals("Your status is set to driver")){
 			System.out.println("Would you like to change your preference to ON DUTY? (y/n)");
 			if (in.nextLine().equals("y")){
