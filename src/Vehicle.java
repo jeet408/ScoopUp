@@ -7,13 +7,19 @@ public class Vehicle {
 	private int availableSeats;
 	
 	/**
+	 * EMPTY CONSTRUCTOR for testing
+	 */
+	public Vehicle(){
+		
+	}
+	/**
 	 * @param year
 	 * @param make
 	 * @param model
 	 * @param color
 	 * @param availableSeats
 	 */
-	private Vehicle(int year, String make, String model, String color, int availableSeats) {
+	 public Vehicle(int year, String make, String model, String color, int availableSeats) {
 		super();
 		this.year = year;
 		this.make = make;
