@@ -94,8 +94,8 @@ public class ScoopUp {
 		System.out.println("***LOGIN***");
 		System.out.println("Press 1 to Login");
 		System.out.println("Press 2 to SignUp");
-		option = in.nextInt();
-		return option; 
+		
+		return in.nextInt();
 	}
 	
 	/**
@@ -130,7 +130,7 @@ public class ScoopUp {
 		System.out.println("*"+m.getName()+"'s vehicle information*");
 		System.out.println("Vehicle: " + m.isHasVehicle());
 		System.out.println("Vehicle: " + m.getVehicles());
-		System.out.println("Seats Available: " + m.vehicle.getAvailableSeats());
+		//System.out.println("Seats Available: " + m.vehicle.getAvailableSeats());
 		
 		System.out.println("*"+m.getName()+"'s schedule*");
 		System.out.println("TO SCHOOL:");
@@ -169,7 +169,7 @@ public class ScoopUp {
 			day = in.nextInt();
 			System.out.println("What time do you need to arrive to school? (Use military time, ex: 1230, 1315, 1400, etc.)");
 			time = in.nextInt();
-			m.memberSchedule.addArrivals(day, time);
+			//m.memberSchedule.addArrivals(day, time);
 			System.out.println("A notification will be sent to you once driver accepts your request");
 			requestRide();
 			
@@ -178,7 +178,7 @@ public class ScoopUp {
 			day = in.nextInt();
 			System.out.println("What time do you need to leave from school? (Use military time, ex: 1230, 1315, 1400, etc.)");
 			time = in.nextInt();
-			m.memberSchedule.addDepartures(day, time);
+			//m.memberSchedule.addDepartures(day, time);
 			System.out.println("A notification will be sent to you once driver accepts your request");
 			requestRide();
 		
@@ -192,11 +192,11 @@ public class ScoopUp {
 	}
 	
 	/**
-	 * Sing Up
+	 * Sign Up
 	 */
 	private void signUpScreen(){
-		trash = in.nextLine();
-		System.out.println("***Sing Up***");
+		in.nextLine(); //FLUSH
+		System.out.println("***Sign Up***");
 		System.out.println("Would you like to be a driver? (y/n) \nNote: This option can be changed later in User's Profile");
 		answer = in.nextLine();
 		
