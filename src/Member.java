@@ -15,11 +15,11 @@ public class Member extends MemberAbstraction {
 	private HashMap<Integer, Integer> departures;
 	
 	
-	MemberStatus memberStatus;
-	float points;
-	int rides; //update as soon as new rides are done
+	private MemberStatus memberStatus;
+	private float points;
+	private int rides; //update as soon as new rides are done
 	
-	MemberSchedule memberSchedule;
+	private MemberSchedule memberSchedule;
 	
 	
 	public Member(){
