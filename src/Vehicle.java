@@ -20,7 +20,7 @@ public class Vehicle {
 	 * @param availableSeats
 	 */
 	 public Vehicle(int year, String make, String model, String color, int availableSeats) {
-		super();
+		//super();
 		this.year = year;
 		this.make = make;
 		this.model = model;
