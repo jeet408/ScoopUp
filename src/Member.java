@@ -7,6 +7,7 @@ public class Member extends MemberAbstraction {
 	private String email;
 	private String password;
 	private String address;
+	private Vehicle vehicle;
 	private boolean hasVehicle;
 	private boolean preference;
 	private ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
@@ -70,9 +71,9 @@ public class Member extends MemberAbstraction {
 	 * Add vehicle to array of vehicles
 	 * @param newVehicle vehicle to be added
 	 */
-	public void setVehicles(Vehicle newVehicle){
-		vehicles.add(newVehicle);
-	}
+//	public void setVehicles(Vehicle newVehicle){
+//		vehicles.add(newVehicle);
+//	}
 	
 /*****************************
  *****************************
@@ -189,15 +190,15 @@ public class Member extends MemberAbstraction {
 	/**
 	 * @return the vehicles
 	 */
-	public ArrayList<String> getVehicles() {
+	public ArrayList<Vehicle> getVehicles() {
 		return vehicles;
 	}
 
 	/**
 	 * @param vehicles the vehicles to set
 	 */
-	public void setVehicles(ArrayList<String> vehicles) {
-		this.vehicles = vehicles;
+	public void setVehicles(Vehicle vehicle) {
+		this.vehicle = vehicle;
 	}
 
 	/**

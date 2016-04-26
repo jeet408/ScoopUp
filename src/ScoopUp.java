@@ -12,10 +12,10 @@ public class ScoopUp {
 	private static String password;
 	private int seats;
 	
-	static Scanner in = new Scanner(System.in);
+	 Scanner in = new Scanner(System.in);
 	
-	static Member m = new Member();
-	
+	 Member m = new Member();
+	Vehicle vehicle = new Vehicle();
 	
 	public static void main(String[] args) {
 		
@@ -133,15 +133,16 @@ public class ScoopUp {
 		if (answer.equals("y")){
 			m.setHasVehicle(true);
 			System.out.println("Enter vehicle's year: ");
-			m.vehicle.setYear(in.nextInt());
+			vehicle.setYear(in.nextInt());
 			System.out.println("Enter vehicle's make: ");
-			m.vehicle.setMake(in.nextLine());
+			vehicle.setMake(in.nextLine());
 			System.out.println("Enter vehicle's model: ");
-			m.vehicle.setModel(in.nextLine());
+			vehicle.setModel(in.nextLine());
 			System.out.println("Enter vehicle's color: ");
-			m.vehicle.setColor(in.nextLine());
+			vehicle.setColor(in.nextLine());
 			System.out.println("Enter vehicle's year: ");
-			m.vehicle.setAvailableSeats(in.nextInt());
+			vehicle.setAvailableSeats(in.nextInt());
+			m.setVehicles(vehicle);
 		} else if (answer.equals("n")) {
 			m.setHasVehicle(false);
 		} else { 
@@ -305,7 +306,7 @@ public class ScoopUp {
 		System.out.println("*"+m.getName()+"'s vehicle information*");
 		System.out.println("Vehicle: " + m.isHasVehicle());
 		System.out.println("Vehicle: " + m.getVehicles());
-		System.out.println("Seats Available: " + m.vehicle.getAvailableSeats());
+		System.out.println("Seats Available: " + vehicle.getAvailableSeats());
 		
 		System.out.println("*"+m.getName()+"'s schedule*");
 		System.out.println("TO SCHOOL:");
@@ -346,7 +347,7 @@ public class ScoopUp {
 			}
 		} else if (option == 3) {
 			seats = in.nextInt();
-			m.vehicle.setAvailableSeats(seats);;
+			vehicle.setAvailableSeats(seats);;
 		} else if (option == 4) {
 			System.out.println("Enter your new schedule:");
 			System.out.println("TO SCHOOL:");
