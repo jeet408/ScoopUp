@@ -12,10 +12,8 @@ public class MemberLongTermSchedule extends MemberSchedule {
 	 * @param day
 	 * @param time
 	 */
-	private MemberLongTermSchedule(int day, int time) {
+	public MemberLongTermSchedule() {
 		super();
-		this.day = day;
-		this.time = time;
 	}
 
 	

@@ -12,10 +12,8 @@ public class MemberShortTermSchedule extends MemberSchedule{
 	/**
 	 * @param shortTermSchedule
 	 */
-	private MemberShortTermSchedule(int day, int time) {
-		
-		this.day = day;
-		this.time = time;
+	public MemberShortTermSchedule() {
+		super();
 	}
 
 	
