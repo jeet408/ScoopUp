@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Member extends MemberAbstraction {
+public class Member extends MemberAbstraction implements Comparable<Member> {
 	
 	private String name;
 	private String email;
@@ -251,6 +251,14 @@ public class Member extends MemberAbstraction {
 	 */
 	public void setDepartures(HashMap<Integer, Integer> departures) {
 		this.departures = departures;
+	}
+	
+	
+	@Override
+	public int compareTo(Member o) {
+		// TODO Auto-generated method stub
+		
+		return 0;
 	}
 
 }
