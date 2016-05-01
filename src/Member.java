@@ -19,11 +19,15 @@ public class Member extends MemberAbstraction {
 	float points;
 	int rides; //update as soon as new rides are done
 	
-	MemberSchedule memberSchedule;
+	MemberSchedule memberLongSchedule;
+	MemberSchedule memberShortSchedule;
 	
 	
 	public Member(){
 		memberStatus = new Passenger(this);
+		
+		memberLongSchedule = new MemberLongTermSchedule();
+		memberShortSchedule = new MemberShortTermSchedule();
 		points = 0;
 		rides = 0;
 	}

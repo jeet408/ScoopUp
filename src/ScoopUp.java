@@ -64,6 +64,11 @@ public class ScoopUp {
 		return option;
 	}
 	
+	/**
+	 * Validates input for Signup or Login
+	 * @param option Option picked by User
+	 * @return true if valid input or false if invalid
+	 */
 	private boolean validInput(int option){
 		if(option == 1 || option == 2){
 			return true;
@@ -143,24 +148,28 @@ public class ScoopUp {
 		/*
 		 * Create a vehicle
 		 */
-		if (answer.equals("y")){
-			m.setHasVehicle(true);
-			System.out.println("Enter vehicle's year: ");
-			vehicle.setYear(in.nextInt());
-			System.out.println("Enter vehicle's make: ");
-			vehicle.setMake(in.nextLine());
-			System.out.println("Enter vehicle's model: ");
-			vehicle.setModel(in.nextLine());
-			System.out.println("Enter vehicle's color: ");
-			vehicle.setColor(in.nextLine());
-			System.out.println("Enter vehicle's year: ");
-			vehicle.setAvailableSeats(in.nextInt());
-			m.setVehicles(vehicle);
-		} else if (answer.equals("n")) {
-			m.setHasVehicle(false);
-		} else { 
-			System.out.println("Invalid ipnut!");
-		}
+		do{
+			if (answer.charAt(0) == 'y'){
+				m.setHasVehicle(true);
+				System.out.println("Enter vehicle's year: ");
+				vehicle.setYear(in.nextInt());
+				System.out.println("Enter vehicle's make: ");
+				vehicle.setMake(in.nextLine());
+				System.out.println("Enter vehicle's model: ");
+				vehicle.setModel(in.nextLine());
+				System.out.println("Enter vehicle's color: ");
+				vehicle.setColor(in.nextLine());
+				System.out.println("Enter vehicle's year: ");
+				vehicle.setAvailableSeats(in.nextInt());
+				m.setVehicles(vehicle);
+			} else if (answer.charAt(0) == 'n') {
+				m.setHasVehicle(false);
+			} 
+			else {
+				//Error Message
+				System.out.println("invalid Input, Try Again!\n");
+			}
+		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
 		
 		System.out.println("You are almost done. \nLastly we need to setup your schedule for the rest of the semester.");
 		System.out.println("Will you be needing a ride on Mondays? (y/n)");
@@ -171,9 +180,9 @@ public class ScoopUp {
 		 */
 		if (answer.equals("y")){
 			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			m.memberSchedule.addArrivals(0, time);
+			m.memberLongSchedule.addArrivals(0, time);
 			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			m.memberSchedule.addDepartures(0, time);
+			m.memberLongSchedule.addDepartures(0, time);
 		} else if (answer.equals("n")) {
 			System.out.println("");
 		} else { 
@@ -188,9 +197,9 @@ public class ScoopUp {
 		 */
 		if (answer.equals("y")){
 			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			m.memberSchedule.addArrivals(1, time);
+			m.memberLongSchedule.addArrivals(1, time);
 			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			m.memberSchedule.addDepartures(1, time);
+			m.memberLongSchedule.addDepartures(1, time);
 		} else if (answer.equals("n")) {
 			System.out.println("");
 		} else { 
@@ -205,9 +214,9 @@ public class ScoopUp {
 		 */
 		if (answer.equals("y")){
 			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			m.memberSchedule.addArrivals(2, time);
+			m.memberLongSchedule.addArrivals(2, time);
 			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			m.memberSchedule.addDepartures(2, time);
+			m.memberLongSchedule.addDepartures(2, time);
 		} else if (answer.equals("n")) {
 			System.out.println("");
 		} else { 
@@ -222,9 +231,9 @@ public class ScoopUp {
 		 */
 		if (answer.equals("y")){
 			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			m.memberSchedule.addArrivals(3, time);
+			m.memberLongSchedule.addArrivals(3, time);
 			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			m.memberSchedule.addDepartures(3, time);
+			m.memberLongSchedule.addDepartures(3, time);
 		} else if (answer.equals("n")) {
 			System.out.println("");
 		} else { 
@@ -239,9 +248,9 @@ public class ScoopUp {
 		 */
 		if (answer.equals("y")){
 			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			m.memberSchedule.addArrivals(4, time);
+			m.memberLongSchedule.addArrivals(4, time);
 			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			m.memberSchedule.addDepartures(4, time);
+			m.memberLongSchedule.addDepartures(4, time);
 		} else if (answer.equals("n")) {
 			System.out.println("");
 		} else { 
@@ -372,9 +381,9 @@ public class ScoopUp {
 			 */
 			if (answer.equals("y")){
 				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-				m.memberSchedule.addArrivals(0, time);
+				m.memberLongSchedule.addArrivals(0, time);
 				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-				m.memberSchedule.addDepartures(0, time);
+				m.memberLongSchedule.addDepartures(0, time);
 			} else if (answer.equals("n")) {
 				System.out.println("");
 			} else { 
@@ -389,9 +398,9 @@ public class ScoopUp {
 			 */
 			if (answer.equals("y")){
 				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-				m.memberSchedule.addArrivals(1, time);
+				m.memberLongSchedule.addArrivals(1, time);
 				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-				m.memberSchedule.addDepartures(1, time);
+				m.memberLongSchedule.addDepartures(1, time);
 			} else if (answer.equals("n")) {
 				System.out.println("");
 			} else { 
@@ -406,9 +415,9 @@ public class ScoopUp {
 			 */
 			if (answer.equals("y")){
 				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-				m.memberSchedule.addArrivals(2, time);
+				m.memberLongSchedule.addArrivals(2, time);
 				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-				m.memberSchedule.addDepartures(2, time);
+				m.memberLongSchedule.addDepartures(2, time);
 			} else if (answer.equals("n")) {
 				System.out.println("");
 			} else { 
@@ -423,9 +432,9 @@ public class ScoopUp {
 			 */
 			if (answer.equals("y")){
 				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-				m.memberSchedule.addArrivals(3, time);
+				m.memberLongSchedule.addArrivals(3, time);
 				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-				m.memberSchedule.addDepartures(3, time);
+				m.memberLongSchedule.addDepartures(3, time);
 			} else if (answer.equals("n")) {
 				System.out.println("");
 			} else { 
@@ -440,9 +449,9 @@ public class ScoopUp {
 			 */
 			if (answer.equals("y")){
 				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-				m.memberSchedule.addArrivals(4, time);
+				m.memberLongSchedule.addArrivals(4, time);
 				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-				m.memberSchedule.addDepartures(4, time);
+				m.memberLongSchedule.addDepartures(4, time);
 			} else if (answer.equals("n")) {
 				System.out.println("");
 			} else { 
@@ -469,7 +478,7 @@ public class ScoopUp {
 			day = in.nextInt();
 			System.out.println("What time do you need to arrive to school? (Use military time, ex: 1230, 1315, 1400, etc.)");
 			time = in.nextInt();
-			m.memberSchedule.addArrivals(day, time);
+			m.memberLongSchedule.addArrivals(day, time);
 			System.out.println("A notification will be sent to you once driver accepts your request");
 			requestRide();
 			
@@ -478,7 +487,7 @@ public class ScoopUp {
 			day = in.nextInt();
 			System.out.println("What time do you need to leave from school? (Use military time, ex: 1230, 1315, 1400, etc.)");
 			time = in.nextInt();
-			m.memberSchedule.addDepartures(day, time);
+			m.memberLongSchedule.addDepartures(day, time);
 			System.out.println("A notification will be sent to you once driver accepts your request");
 			requestRide();
 		
