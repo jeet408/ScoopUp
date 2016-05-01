@@ -121,21 +121,8 @@ public class ScoopUp {
 		Member temp = new Member();
 		
 		System.out.println("***Sign Up***");
-		System.out.println("Would you like to be a driver? (y/n) \nNote: This option can be changed later in User's Profile");
-		answer = in.nextLine();
+
 		
-		/*
-		 * Set member status to driver or passenger
-		 */
-		if (answer.equals("y")) {
-			temp.setDriver();
-			//temp.setMemberStatus(p);
-		} else if (answer.equals("n")) {
-			temp.setPassenger();
-		}
-		else {
-			System.out.println("Invalid input!");
-		}
 		
 		System.out.println("Enter your full name: ");
 		temp.setName(in.nextLine());
@@ -148,10 +135,14 @@ public class ScoopUp {
 		System.out.println("Do you have a vehicle? (y/n)");
 		answer = in.nextLine();
 		
+		System.out.println("Would you like to be a driver? (y/n) \nNote: This option can be changed later in User's Profile");
+
 		/*
 		 * Create a vehicle
 		 */
 		do{
+			answer = in.nextLine();
+			
 			if (answer.charAt(0) == 'y'){
 				temp.setHasVehicle(true);
 				System.out.println("Enter vehicle's year: ");
@@ -175,108 +166,124 @@ public class ScoopUp {
 		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
 		
 		System.out.println("You are almost done. \nLastly we need to setup your schedule for the rest of the semester.");
-		System.out.println("Will you be needing a ride on Mondays? (y/n)");
-		answer = in.nextLine();
+
 		
 		/*
 		 * MONDAY -- Pass info to memberLongTermSchedule
 		 */
-		if (answer.equals("y")){
-			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			temp.memberLongSchedule.addArrivals(0, time);
-			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			temp.memberLongSchedule.addDepartures(0, time);
-		} else if (answer.equals("n")) {
-			System.out.println("");
-		} else { 
-			System.out.println("Invalid ipnut!");
-		}
+		do{
+			System.out.println("Will you be needing a ride on Mondays? (y/n)");
+			answer = in.nextLine();
 		
-		System.out.println("Will you be needing a ride on Tuesdays? (y/n)");
-		answer = in.nextLine();
+			if (answer.equals("y")){
+				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
+				temp.memberLongSchedule.addArrivals(0, time);
+				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
+				temp.memberLongSchedule.addDepartures(0, time);
+			} else if (answer.equals("n")) {
+				System.out.println("");
+			}else{
+				System.out.println("Invalid Input, Try again!");
+			}
+		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
+		
+		
 		
 		/*
 		 * TUESDAY -- info to memberLongTermSchedule
 		 */
-		if (answer.equals("y")){
-			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			temp.memberLongSchedule.addArrivals(1, time);
-			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			temp.memberLongSchedule.addDepartures(1, time);
-		} else if (answer.equals("n")) {
-			System.out.println("");
-		} else { 
-			System.out.println("Invalid ipnut!");
-		}
+		do {
+			System.out.println("Will you be needing a ride on Tuesdays? (y/n)");
+			answer = in.nextLine();
+			if (answer.equals("y")){
+				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
+				temp.memberLongSchedule.addArrivals(1, time);
+				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
+				temp.memberLongSchedule.addDepartures(1, time);
+			} else if (answer.equals("n")) {
+				System.out.println("");
+			}else{
+				System.out.println("Invalid Input, Try again!");
+			}
+		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
 		
-		System.out.println("Will you be needing a ride on Wednesdays? (y/n)");
-		answer = in.nextLine();
-		
+
 		/*
 		 * WEDNESDAY -- Pass info to memberLongTermSchedule
 		 */
-		if (answer.equals("y")){
-			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			temp.memberLongSchedule.addArrivals(2, time);
-			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			temp.memberLongSchedule.addDepartures(2, time);
-		} else if (answer.equals("n")) {
-			System.out.println("");
-		} else { 
-			System.out.println("Invalid ipnut!");
-		}
-		
-		System.out.println("Will you be needing a ride on Thursdays? (y/n)");
-		answer = in.nextLine();
-		
+		do{
+			System.out.println("Will you be needing a ride on Wednesdays? (y/n)");
+			answer = in.nextLine();
+			if (answer.equals("y")){
+				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
+				temp.memberLongSchedule.addArrivals(2, time);
+				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
+				temp.memberLongSchedule.addDepartures(2, time);
+			} else if (answer.equals("n")) {
+				System.out.println("");
+			}else{
+				System.out.println("Invalid Input, Try again!");
+			}
+		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
+
 		/*
 		 * Pass info to memberLongTermSchedule
 		 */
-		if (answer.equals("y")){
-			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			temp.memberLongSchedule.addArrivals(3, time);
-			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			temp.memberLongSchedule.addDepartures(3, time);
-		} else if (answer.equals("n")) {
-			System.out.println("");
-		} else { 
-			System.out.println("Invalid ipnut!");
-		}
 		
-		System.out.println("Will you be needing a ride on Fridays? (y/n)");
-		answer = in.nextLine();
+		do{
+			System.out.println("Will you be needing a ride on Thursdays? (y/n)");
+			answer = in.nextLine();
+			
+			if (answer.equals("y")){
+				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
+				temp.memberLongSchedule.addArrivals(3, time);
+				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
+				temp.memberLongSchedule.addDepartures(3, time);
+			} else if (answer.equals("n")) {
+				System.out.println("");
+			}else{
+				System.out.println("Invalid Input, Try again!");
+			}
+		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
+
 		
 		/*
 		 * FRIDAY -- Pass info to memberLongTermSchedule
 		 */
-		if (answer.equals("y")){
-			System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
-			temp.memberLongSchedule.addArrivals(4, time);
-			System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
-			temp.memberLongSchedule.addDepartures(4, time);
-		} else if (answer.equals("n")) {
-			System.out.println("");
-		} else { 
-			System.out.println("Invalid ipnut!");
-		}
-		
-		if (temp.getMemberStatus().equals("Your status is set to driver")){
-			System.out.println("Would you like to change your preference to ON DUTY? (y/n)");
-			if (in.nextLine().equals("y")){
-				temp.setPreference(true);
-				System.out.println("You are ON DUTY!");
-			} else if (in.nextLine().equals("n")){
-				temp.setPreference(false);
-				System.out.println("You are OFF DUTY! You may change your preference in your Profile");
-			} else {
-				System.out.println("Invalid Input!");
+		do{
+			System.out.println("Will you be needing a ride on Fridays? (y/n)");
+			answer = in.nextLine();
+			
+			if (answer.equals("y")){
+				System.out.println("What time do you need to be in school? (__:__ <-- use 24 hours time)");
+				temp.memberLongSchedule.addArrivals(4, time);
+				System.out.println("What time do you need to be leave school? (__:__ <-- use 24 hours time)");
+				temp.memberLongSchedule.addDepartures(4, time);
+			} else if (answer.equals("n")) {
+				System.out.println("");
+			}else{
+				System.out.println("Invalid Input, Try again!");
 			}
+		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
+		
+		System.out.println("Would you like to change your preference to ON DUTY? (y/n)");
+		if (in.nextLine().equals("y")){
+			temp.setPreference(true);
+			System.out.println("You are ON DUTY!");
+		} else if (in.nextLine().equals("n")){
+			temp.setPreference(false);
+			System.out.println("You are OFF DUTY! You may change your preference in your Profile");
+		} else {
+			System.out.println("Invalid Input!");
 		}
+
+		
 		System.out.println("\n");
 		System.out.println("\n");
 		System.out.println("Congratulation! You are registered with ScoopUp.");
 		System.out.println("\n");
 		System.out.println("\n");
+		
 	}
 	
 	/**

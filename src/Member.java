@@ -15,7 +15,8 @@ public class Member extends MemberAbstraction {
 	private HashMap<Integer, Integer> departures;
 	
 	
-	MemberStatus memberStatus;
+	private Boolean status;
+	
 	float points;
 	int rides; //update as soon as new rides are done
 	
@@ -24,7 +25,6 @@ public class Member extends MemberAbstraction {
 	
 	
 	public Member(){
-		memberStatus = new Passenger(this);
 		
 		memberLongSchedule = new MemberLongTermSchedule();
 		memberShortSchedule = new MemberShortTermSchedule();
@@ -121,26 +121,6 @@ public class Member extends MemberAbstraction {
 	 **         GET VEHICLES           **
 	 ***********************************/
 
-	
-	/************
-	 * WHat??
-	 */
-	public void setPassenger() {
-		
-		System.out.println(memberStatus.setPassenger());
-	}
-	
-	public void setDriver() {
-		System.out.println(memberStatus.setDriver());
-	}
-	
-	public void setMemberStatus(MemberStatus ms) {
-		memberStatus = ms;
-	}
-	
-	public MemberStatus getMemberStatus() {
-		return memberStatus;
-	}
 
 	/**
 	 * 
