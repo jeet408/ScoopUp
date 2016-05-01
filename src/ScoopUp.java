@@ -55,10 +55,23 @@ public class ScoopUp {
 		
 		System.out.println("Welcome to ScoopUp!");
 		System.out.println("***LOGIN***");
-		System.out.println("Press 1 to Login");
-		System.out.println("Press 2 to SignUp");
-		option = in.nextInt();
+		do{
+			System.out.println("Press 1 to Login");
+			System.out.println("Press 2 to SignUp");
+			option = in.nextInt();
+		}while(validInput(option) == false);
+		
 		return option;
+	}
+	
+	private boolean validInput(int option){
+		if(option == 1 || option == 2){
+			return true;
+		}
+		else{
+			System.out.println("Invalid Input\n");
+			return false;
+		}
 	}
 	
 	/**
