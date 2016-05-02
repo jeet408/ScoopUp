@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.time.DayOfWeek;
 import java.util.Scanner;
@@ -20,7 +21,7 @@ public class ScoopUp {
 	
 	Vehicle vehicle = new Vehicle();
 	
-	public static void main(String[] args) {
+	public static void main(String[] args){
 		
 //		Member member;
 //		member = new Member();
@@ -30,7 +31,7 @@ public class ScoopUp {
 		ScoopUp system = new ScoopUp();
 		
 		system.systemStart(); 	// Login/SignUp
-//		system.systemMain();	// Main menu
+		system.systemMain();	// Main menu
 		
 	}
 	
@@ -48,7 +49,6 @@ public class ScoopUp {
 				valid = true;
 			} 
 		}while(valid == false);
-		mainScreen();
 		
 	}
 
@@ -288,42 +288,52 @@ public class ScoopUp {
 		currentUser = MemberList.get(MemberList.size() - 1);
 		
 	}
+
+	
+	/**
+	 * MAIN SYSTEM
+	 */
+	public void systemMain(){
+		menuScreen();
+		int choice = -1;
+		
+		//LACKS ERROR CHECKING
+		do{
+			choice = in.nextInt();
+
+		}while(choice < 0 || choice > 4);
+		
+		switch(choice){
+			case 1: //viewProfileScreen();
+				break;
+			case 2: //requestionRides();
+				break;
+			case 3: //payments();
+				break;
+			case 4: return;
+			default: System.out.println("Bad option");
+				break;
+		}
+	
+	}
 	
 	/**
 	 * MAIN MENU SCREEN
-	 * @return
 	 */
-	private int mainScreen(){
+	private void menuScreen(){
 		
 		//System.out.println("Logged in as " + member.getName);
-		System.out.println("***MAIN MENU***");
-		System.out.println("Press 1 to View Profile");
-		System.out.println("Press 2 to Request a Ride");
-		System.out.println("Press 3 for Payments");
-		System.out.println("Press 4 to Logout");
-		option = in.nextLine().charAt(0);
-		return option;
+		System.out.println("***************MAIN MENU*******************");
+		System.out.println("*                                         *");
+		System.out.println("* Select an option:                       *");
+		System.out.println("*   1) View Profile                       *");
+		System.out.println("*   2) Request a Ride                     *");
+		System.out.println("*   3) Payments                           *");
+		System.out.println("*   4) Logout                             *");
+		System.out.println("*                                         *");
+		System.out.println("*******************************************");
+
 	}
-	
-//	/**
-//	 * MAIN SYSTEM
-//	 */
-//	public void systemMain() {
-//		mainScreen();
-//		if (option == 1){
-//			viewProfileScreen();
-//		} else if (option == 2){
-//			requestRide();
-//		} else if (option == 3){
-//		//payments();
-//		} else if (option == 4){
-//			systemStart();
-//		} else {
-//			System.out.println("Invalid Input");
-//			systemMain();
-//		}
-//	
-//	}
 //	
 //	/**
 //	 * VIEW PROFILE SCREEN
@@ -553,5 +563,6 @@ public class ScoopUp {
 		return null;
 		
 	}
+	
 	
 }
