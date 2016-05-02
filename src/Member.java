@@ -1,22 +1,36 @@
+/***
+ * For the Purpose of this project, "destination" will be set to SJSU
+ * Latitude: 37.3244939,
+ * Longitude: -121.8818703
+ */
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
 public class Member extends MemberAbstraction implements Comparable<Member>, java.io.Serializable {
 	
+	private final String schoolCoordinates = "37.3244939,-121.8818703";
 	private String name;
 	private String email;
 	private String password;
+	
 	private String address;
 	private String city;
 	private String State;
-	private String zipCode;
+	private String zipCode; //Useless
+	private String homeCoordinates;
+	
+	private int distanceToSchool;
+	private int timeToSchool;
+	
 	private boolean hasVehicle;
 	private boolean preference;
 	private ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
 	private Vehicle vehicle;
 	private HashMap<Integer, Integer> arrivals;
 	private HashMap<Integer, Integer> departures;
+	
 	
 	
 	private Boolean status;
@@ -72,11 +86,39 @@ public class Member extends MemberAbstraction implements Comparable<Member>, jav
 
 			this.address = st.nextElement().toString();
 			this.city = st.nextElement().toString().substring(1);
-			
 			this.State = st.nextElement().toString().substring(1);
-
 			this.zipCode = st.nextElement().toString().substring(1);
+			
+			try {
+				setHome();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	
+	}
+	
+	/**
+	 * @throws IOException 
+	 * 
+	 */
+	private void setHome() throws IOException{
+		FindLocation fl = new FindLocation();
+		
+		homeCoordinates = fl.findCoordinates(address + "+" + city + "+" + State);
+	}
+	
+	/**
+	 * @throws IOException 
+	 * 
+	 */
+	public void setTimeandDistance() throws IOException{
+		FindLocation fl = new FindLocation();
+		
+		fl.findDistanceTime(getCoordinates(), schoolCoordinates);
+		distanceToSchool = fl.getDistance();
+		timeToSchool = fl.getTime();
+		
 	}
 	
 	/***************************************
@@ -114,7 +156,7 @@ public class Member extends MemberAbstraction implements Comparable<Member>, jav
 
 
 	/**
-	 * @return the password
+	 * @return the password?
 	 */
 	public String getPassword() {
 		return password;
@@ -126,6 +168,12 @@ public class Member extends MemberAbstraction implements Comparable<Member>, jav
 	public String getAddress() {
 		return address;
 	}
+	
+	
+	public String getCoordinates(){
+		return homeCoordinates;
+	}
+
 
 	/************************************
 	 **         GET VEHICLES           **

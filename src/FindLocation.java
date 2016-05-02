@@ -1,3 +1,10 @@
+/***
+ * Locations must be inputed as Address+City+State
+ * Origin must be inputed as longitude,latitude
+ * Destination must be inputed as longitude,latitude
+ * 
+ * 
+ */
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,7 +22,13 @@ public class FindLocation {
 		coordinates = "";
 	}
 	
-	public void findCoordinates(String location) throws IOException{
+	/**
+	 * Finds longitude and Latitude of location
+	 * @param location String location
+	 * @return coordinates Coordinates of location displayed as xx.xxxxxx,xx.xxxxxxx
+	 * @throws IOException
+	 */
+	public String findCoordinates(String location) throws IOException{
 		String webURL = "https://maps.googleapis.com/maps/api/geocode/json?address=";
 	    URL loc = new URL(webURL);
 	    URLConnection yc = loc.openConnection();
@@ -37,8 +50,14 @@ public class FindLocation {
 	        }
 	    }
 	    in.close();
+	    return coordinates;
 	}
-	
+	/**
+	 * Finds distance to school
+	 * @param origin longitude and latitude of origin
+	 * @param destination longitude and latitude of destination
+	 * @throws IOException
+	 */
 	public void findDistanceTime(String origin, String destination) throws IOException{
     	String webURL = "https://maps.googleapis.com/maps/api/distancematrix/json?";
     	String originRaw = "origin=" + origin;
@@ -68,5 +87,22 @@ public class FindLocation {
         	}
         	
         }
+	}
+	
+	/**
+	 * Get Distance to Travel from find Distance
+	 * @return
+	 */
+	public int getDistance(){
+		return distance;
+	}
+	
+	
+	/**
+	 * Get Time to travel to desired destination
+	 * @return
+	 */
+	public int getTime(){
+		return time;
 	}
 }

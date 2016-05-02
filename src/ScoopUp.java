@@ -1,10 +1,14 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.security.MessageDigest;
 import java.time.DayOfWeek;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class ScoopUp {
+public class ScoopUp{
 		
 	private static int option;
 	private String answer;
@@ -14,7 +18,7 @@ public class ScoopUp {
 	private static String email;
 	private static String password;
 	private int seats;
-	private ArrayList<Member> MemberList = new ArrayList<Member>();
+	private ArrayList<Member> MemberList;
 	private Member currentUser;
 	
 	Scanner in = new Scanner(System.in);
@@ -22,16 +26,19 @@ public class ScoopUp {
 	Vehicle vehicle = new Vehicle();
 	
 	public static void main(String[] args){
-		
-//		Member member;
-//		member = new Member();
-//		member.setPassenger();
-//		member.setDriver();
+
 		
 		ScoopUp system = new ScoopUp();
+		system.MemberList = new ArrayList<Member>();
 		
-		system.systemStart(); 	// Login/SignUp
-		system.systemMain();	// Main menu
+		while(true){
+			system.loadInfo();
+			
+			system.systemStart(); 	// Login/SignUp
+			system.systemMain();	// Main menu
+			
+			system.saveInfo();
+		}
 		
 	}
 	
@@ -99,12 +106,14 @@ public class ScoopUp {
 			return false;
 		}
 		
-		System.out.println("Enter you password: ");
-		String hashedPass = hashPassword(in.nextLine());
 		//Loop for 3 tries
 		int tries = 0;
 		boolean validPass = false;
 		while(tries < 3 && !validPass){
+
+			System.out.println("Enter you password: ");
+			String hashedPass = hashPassword(in.nextLine());
+			
 			if(hashedPass.equals(currentUser.getPassword())){
 				validPass = true;
 			}
@@ -135,7 +144,14 @@ public class ScoopUp {
 		temp.setName(in.nextLine());
 		
 		System.out.println("Enter your email address: ");
-		temp.setEmail(in.nextLine());
+		String tempEmail = in.nextLine();
+		for(Member m: MemberList){
+			if(m.getEmail().equals(tempEmail.toLowerCase())){
+				System.out.println("User already Exists!!\n");
+				return;
+			}
+		}
+		temp.setEmail(tempEmail.toLowerCase());
 		
 		System.out.println("Enter your password: ");
 		String password = in.nextLine();
@@ -284,8 +300,10 @@ public class ScoopUp {
 		System.out.println("\n");
 		
 		MemberList.add(temp);
+		
 		//Set Currentuser
 		currentUser = MemberList.get(MemberList.size() - 1);
+		System.out.println(currentUser.getEmail());
 		
 	}
 
@@ -310,7 +328,8 @@ public class ScoopUp {
 				break;
 			case 3: //payments();
 				break;
-			case 4: return;
+			case 4: System.out.println("Saving Info...");
+				return;
 			default: System.out.println("Bad option");
 				break;
 		}
@@ -522,6 +541,48 @@ public class ScoopUp {
 //			requestRide();
 //		}
 //	}
+	
+	/**
+	 * Save Members Info
+	 */
+	private void saveInfo(){
+	      try
+	      {
+	         FileOutputStream fileOut = new FileOutputStream("members.ser");
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(MemberList);
+	         out.close();
+	         fileOut.close();
+	         System.out.printf("Serialized data is saved in members.ser\n");
+	    	 
+	      }catch(IOException i)
+	      {
+	          i.printStackTrace();
+	      }
+	}
+	
+	/**
+	 * Load Members Info
+	 */
+	private void loadInfo(){
+		try
+		{
+		   FileInputStream fileIn = new FileInputStream("members.ser");
+		   ObjectInputStream in = new ObjectInputStream(fileIn);
+		   MemberList = (ArrayList<Member>) in.readObject();
+		   in.close();
+		   fileIn.close();
+		}catch(IOException i)
+		{
+			i.printStackTrace();
+		   return;
+		}catch(ClassNotFoundException c)
+		{
+		   System.out.println("Members class not found");
+		   return;
+		}
+	}
+	
 
 	/**
 	 * @return the option
@@ -556,7 +617,7 @@ public class ScoopUp {
 	
 	private Member findMember(String email){
 		for(Member m: MemberList){
-			if(m.getEmail().contentEquals(email)){
+			if(m.getEmail().contentEquals(email.toLowerCase())){
 				return m;
 			}
 		}
