@@ -131,8 +131,6 @@ public class ScoopUp {
 		
 		System.out.println("***Sign Up***");
 
-
-		
 		System.out.println("Enter your full name: ");
 		temp.setName(in.nextLine());
 		

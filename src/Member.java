@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-public class Member extends MemberAbstraction implements Comparable<Member> {
+public class Member extends MemberAbstraction implements Comparable<Member>, java.io.Serializable {
 	
 	private String name;
 	private String email;
