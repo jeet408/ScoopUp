@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class ScoopUp {
 		
-	private static char option;
+	private static int option;
 	private String answer;
 	private String trash;
 	private int time;
@@ -45,6 +45,7 @@ public class ScoopUp {
 				valid = login();
 			} else if (option == 2){
 				signUpScreen();
+				valid = true;
 			} 
 		}while(valid == false);
 		mainScreen();
@@ -62,7 +63,7 @@ public class ScoopUp {
 		do{
 			System.out.println("Press 1 to Login");
 			System.out.println("Press 2 to SignUp");
-			option = in.nextLine().charAt(0);
+			option = in.nextInt();
 		}while(validInput(option) == false);
 		
 		return option;
@@ -73,8 +74,8 @@ public class ScoopUp {
 	 * @param option Option picked by User
 	 * @return true if valid input or false if invalid
 	 */
-	private boolean validInput(char option){
-		if(option == '1' || option == '2'){
+	private boolean validInput(int option){
+		if(option == 1 || option == 2){
 			return true;
 		}
 		else{
@@ -130,7 +131,7 @@ public class ScoopUp {
 		
 		System.out.println("***Sign Up***");
 
-		
+
 		
 		System.out.println("Enter your full name: ");
 		temp.setName(in.nextLine());

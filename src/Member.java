@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 public class Member extends MemberAbstraction implements Comparable<Member> {
 	
@@ -7,10 +8,13 @@ public class Member extends MemberAbstraction implements Comparable<Member> {
 	private String email;
 	private String password;
 	private String address;
-	private Vehicle vehicle;
+	private String city;
+	private String State;
+	private String zipCode;
 	private boolean hasVehicle;
 	private boolean preference;
 	private ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
+	private Vehicle vehicle;
 	private HashMap<Integer, Integer> arrivals;
 	private HashMap<Integer, Integer> departures;
 	
@@ -25,7 +29,6 @@ public class Member extends MemberAbstraction implements Comparable<Member> {
 	
 	
 	public Member(){
-		
 		memberLongSchedule = new MemberLongTermSchedule();
 		memberShortSchedule = new MemberShortTermSchedule();
 		points = 0;
@@ -65,7 +68,15 @@ public class Member extends MemberAbstraction implements Comparable<Member> {
 	 * @param address the address to set
 	 */
 	public void setAddress(String address) {
-		this.address = address;
+		StringTokenizer st = new StringTokenizer(address, ",");
+
+			this.address = st.nextElement().toString();
+			this.city = st.nextElement().toString().substring(1);
+			
+			this.State = st.nextElement().toString().substring(1);
+
+			this.zipCode = st.nextElement().toString().substring(1);
+	
 	}
 	
 	/***************************************
