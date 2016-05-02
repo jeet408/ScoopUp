@@ -1,9 +1,11 @@
+import java.security.MessageDigest;
 import java.time.DayOfWeek;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class ScoopUp {
 		
-	private static int option;
+	private static char option;
 	private String answer;
 	private String trash;
 	private int time;
@@ -11,8 +13,10 @@ public class ScoopUp {
 	private static String email;
 	private static String password;
 	private int seats;
+	private ArrayList<Member> MemberList = new ArrayList<Member>();
+	private Member currentUser;
 	
-	 Scanner in = new Scanner(System.in);
+	Scanner in = new Scanner(System.in);
 	
 	Vehicle vehicle = new Vehicle();
 	
@@ -33,18 +37,18 @@ public class ScoopUp {
 	/**
 	 * START THE PROGRAM
 	 */
-	//TODO: Needs to be 
 	public void systemStart(){
-		loginScreen();
+		boolean valid = false;
+		do{
+			loginScreen();
 			if (option == 1){
-		//	login();
-		} else if (option == 2){
-			signUpScreen();
-			systemStart();
-		} else {
-			System.out.println("Invalid Input!");
-			systemStart();
-		}
+				valid = login();
+			} else if (option == 2){
+				signUpScreen();
+			} 
+		}while(valid == false);
+		mainScreen();
+		
 	}
 
 	/**
@@ -54,11 +58,11 @@ public class ScoopUp {
 	private int loginScreen(){
 		
 		System.out.println("Welcome to ScoopUp!");
-		System.out.println("***LOGIN***");
+		System.out.println("********LOGIN********");
 		do{
 			System.out.println("Press 1 to Login");
 			System.out.println("Press 2 to SignUp");
-			option = in.nextInt();
+			option = in.nextLine().charAt(0);
 		}while(validInput(option) == false);
 		
 		return option;
@@ -69,8 +73,8 @@ public class ScoopUp {
 	 * @param option Option picked by User
 	 * @return true if valid input or false if invalid
 	 */
-	private boolean validInput(int option){
-		if(option == 1 || option == 2){
+	private boolean validInput(char option){
+		if(option == '1' || option == '2'){
 			return true;
 		}
 		else{
@@ -81,36 +85,40 @@ public class ScoopUp {
 	
 //	/**
 //	 * LOGIN SYSTEM
-//	 * @return
+//	 * 
 //	 */
-//	public int login(){
-//		if (option == 1) {
-//			//TO DO: Implement login
-//			in.nextLine();
-//			//System.out.println(m.getEmail() +" "+ m.getPassword());//TEST
-//			System.out.println("Enter your email address: ");
-//			email = in.nextLine();
-//			m.setEmail(email);
-//			System.out.println("Enter you password: ");
-//			password = in.nextLine();
-//			m.setPassword(password);
-//			
-//			if (email.equals(m.getEmail()) && password.equals(m.getPassword())){
-//				system.mainScreen();
-//			}
-//			else {
-//				System.out.println("Invalid user credentials!");
-//			}
-//			
-//			return option;
-//		} else if (option == 2) {
-//			signUpScreen();
-//			return 1;		
-//		} else {
-//			System.out.println("Invalid input!");
-//			return 1;
-//		}
-//	}
+	public boolean login(){
+		in.nextLine(); //FLUSH
+		
+		System.out.println("Enter your email address: ");
+		email = in.nextLine();
+		currentUser = findMember(email);
+		if(currentUser == null){
+			System.out.println("User account does not exist!\n");
+			return false;
+		}
+		
+		System.out.println("Enter you password: ");
+		String hashedPass = hashPassword(in.nextLine());
+		//Loop for 3 tries
+		int tries = 0;
+		boolean validPass = false;
+		while(tries < 3 && !validPass){
+			if(hashedPass.equals(currentUser.getPassword())){
+				validPass = true;
+			}
+			else{
+				tries++;
+				System.out.println("Invalid Password! ");
+				System.out.println(3 - tries + "attempts left.\n");
+				if(tries >= 3){
+					System.out.println("Out of login attempts!\n");
+					return false;
+				}
+			}
+		}
+		return true;
+	}
 	
 	/**
 	 * SINGUP SCREEN
@@ -126,16 +134,18 @@ public class ScoopUp {
 		
 		System.out.println("Enter your full name: ");
 		temp.setName(in.nextLine());
+		
 		System.out.println("Enter your email address: ");
 		temp.setEmail(in.nextLine());
+		
 		System.out.println("Enter your password: ");
-		temp.setPassword(in.nextLine());
+		String password = in.nextLine();
+		temp.setPassword(hashPassword(password));
+
 		System.out.println("Enter your full address (street, city, state, zip code): ");
 		temp.setAddress(in.nextLine());
-		System.out.println("Do you have a vehicle? (y/n)");
-		answer = in.nextLine();
 		
-		System.out.println("Would you like to be a driver? (y/n) \nNote: This option can be changed later in User's Profile");
+		System.out.println("Do you have a vehicle? (y/n)");
 
 		/*
 		 * Create a vehicle
@@ -163,7 +173,7 @@ public class ScoopUp {
 				//Error Message
 				System.out.println("invalid Input, Try Again!\n");
 			}
-		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
+		}while(answer.charAt(0) != 'y' && answer.charAt(0) != 'n');
 		
 		System.out.println("You are almost done. \nLastly we need to setup your schedule for the rest of the semester.");
 
@@ -185,7 +195,7 @@ public class ScoopUp {
 			}else{
 				System.out.println("Invalid Input, Try again!");
 			}
-		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
+		}while(answer.charAt(0) != 'y' && answer.charAt(0) != 'n');
 		
 		
 		
@@ -205,7 +215,7 @@ public class ScoopUp {
 			}else{
 				System.out.println("Invalid Input, Try again!");
 			}
-		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
+		}while(answer.charAt(0) != 'y' && answer.charAt(0) != 'n');
 		
 
 		/*
@@ -224,7 +234,7 @@ public class ScoopUp {
 			}else{
 				System.out.println("Invalid Input, Try again!");
 			}
-		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
+		}while(answer.charAt(0) != 'y' && answer.charAt(0) != 'n');
 
 		/*
 		 * Pass info to memberLongTermSchedule
@@ -244,7 +254,7 @@ public class ScoopUp {
 			}else{
 				System.out.println("Invalid Input, Try again!");
 			}
-		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
+		}while(answer.charAt(0) != 'y' && answer.charAt(0) != 'n');
 
 		
 		/*
@@ -264,18 +274,8 @@ public class ScoopUp {
 			}else{
 				System.out.println("Invalid Input, Try again!");
 			}
-		}while(answer.charAt(0) != 'y' || answer.charAt(0) != 'n');
+		}while(answer.charAt(0) != 'y' && answer.charAt(0) != 'n');
 		
-		System.out.println("Would you like to change your preference to ON DUTY? (y/n)");
-		if (in.nextLine().equals("y")){
-			temp.setPreference(true);
-			System.out.println("You are ON DUTY!");
-		} else if (in.nextLine().equals("n")){
-			temp.setPreference(false);
-			System.out.println("You are OFF DUTY! You may change your preference in your Profile");
-		} else {
-			System.out.println("Invalid Input!");
-		}
 
 		
 		System.out.println("\n");
@@ -283,6 +283,10 @@ public class ScoopUp {
 		System.out.println("Congratulation! You are registered with ScoopUp.");
 		System.out.println("\n");
 		System.out.println("\n");
+		
+		MemberList.add(temp);
+		//Set Currentuser
+		currentUser = MemberList.get(MemberList.size() - 1);
 		
 	}
 	
@@ -298,7 +302,7 @@ public class ScoopUp {
 		System.out.println("Press 2 to Request a Ride");
 		System.out.println("Press 3 for Payments");
 		System.out.println("Press 4 to Logout");
-		option = in.nextInt();
+		option = in.nextLine().charAt(0);
 		return option;
 	}
 	
@@ -517,11 +521,38 @@ public class ScoopUp {
 		return option;
 	}
 	
+	
 	/**
-	 * @param option the option to set
+	 * Hash User Password
+	 * @param pass plaintext passed in
+	 * @return SHA256 pasword hashed
 	 */
-	public void setOption(int option) {
-		this.option = option;
+	private String hashPassword(String pass){
+	    try{
+	        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+	        byte[] hash = digest.digest(pass.getBytes("UTF-8"));
+	        StringBuffer hexString = new StringBuffer();
+
+	        for (int i = 0; i < hash.length; i++) {
+	            String hex = Integer.toHexString(0xff & hash[i]);
+	            if(hex.length() == 1) hexString.append('0');
+	            hexString.append(hex);
+	        }
+
+	        return hexString.toString();
+	    } catch(Exception ex){
+	       throw new RuntimeException(ex);
+	    }
+	}
+	
+	private Member findMember(String email){
+		for(Member m: MemberList){
+			if(m.getEmail().contentEquals(email)){
+				return m;
+			}
+		}
+		return null;
+		
 	}
 	
 }

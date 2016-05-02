@@ -102,7 +102,6 @@ public class Member extends MemberAbstraction implements Comparable<Member> {
 	}
 
 
-
 	/**
 	 * @return the password
 	 */
